@@ -1,0 +1,24 @@
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
+import { Servicio } from '../servicios/servicio.entity';
+import { Usuario } from '../usuarios/usuarios.entity';
+
+@Entity()
+export class Reserva {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @ManyToOne(() => Servicio, { eager: true })
+  servicio: Servicio;
+
+  @ManyToOne(() => Usuario, { eager: true })
+  usuario: Usuario;
+
+  @CreateDateColumn()
+  fechaReserva: Date;
+
+  @Column({ type: 'date' })
+  fechaServicio: string;
+
+  @Column({ default: 'pendiente' })
+  estado: string;
+}
