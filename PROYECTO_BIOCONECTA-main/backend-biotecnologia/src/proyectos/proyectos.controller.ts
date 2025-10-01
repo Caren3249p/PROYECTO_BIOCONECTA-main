@@ -1,15 +1,27 @@
-import { Controller, Get, Post, Body, Param, Delete, UsePipes, ValidationPipe, Inject, Req, UseGuards } from '@nestjs/common';
+import { 
+  Controller, 
+  Get, 
+  Post, 
+  Body, 
+  Param, 
+  Delete, 
+  UsePipes, 
+  ValidationPipe, 
+  Req, 
+  UseGuards 
+} from '@nestjs/common';
 import { ProyectosService } from './proyectos.service';
 import { Proyecto } from './proyectos.entity';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { LogsService } from '../logs/logs.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+
 @Controller('proyectos')
 export class ProyectosController {
   constructor(
     private readonly proyectosService: ProyectosService,
-    @Inject(LogsService) private readonly logsService: LogsService,
+    private readonly logsService: LogsService, // 👈 ya no necesitas @Inject
   ) {}
 
   @Get()

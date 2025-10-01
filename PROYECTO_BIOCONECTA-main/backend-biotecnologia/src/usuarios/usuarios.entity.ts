@@ -24,5 +24,6 @@ export class Usuario {
 
   @ManyToOne(() => Rol, { nullable: true })
   rol: Rol;
+  asistencias: any;
 }
 

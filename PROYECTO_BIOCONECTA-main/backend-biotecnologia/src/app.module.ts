@@ -17,27 +17,25 @@ import { ReservasModule } from './reservas/reservas.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',   
+      type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
-      password: '123',
-      database: 'bioconeecta',
+      username: 'biotec',             // ✅ Usuario principal
+      password: 'oki31xdc!#biotec',   // ✅ Contraseña de biotec
+      database: 'mydb',               // ✅ Base de datos creada
       autoLoadEntities: true,
       synchronize: true,
     }),
     UsuariosModule,
     AuthModule,
-    ProyectosModule,
+    ProyectosModule,   // 👈 ya importamos el módulo que usa Logs
     ServiciosModule,
     RolesModule,
     TareasModule,
     HitosModule,
     DocumentosModule,
-    LogsModule,
+    LogsModule,        // 👈 logs también se registra aquí
     ReservasModule,
   ],
- 
 })
 export class AppModule {}
-

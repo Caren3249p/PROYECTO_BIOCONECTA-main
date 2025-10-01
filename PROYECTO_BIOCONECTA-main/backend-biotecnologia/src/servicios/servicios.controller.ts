@@ -1,4 +1,7 @@
-import { Controller, Get, Post, Put, Body, Param, Delete, UsePipes, ValidationPipe, Req, UseGuards, Inject } from '@nestjs/common';
+import { 
+  Controller, Get, Post, Put, Body, Param, Delete, 
+  UsePipes, ValidationPipe, Req, UseGuards 
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { LogsService } from '../logs/logs.service';
 import { ServiciosService } from './servicios.service';
@@ -11,7 +14,7 @@ import { RolesGuard } from '../auth/roles.guard';
 export class ServiciosController {
   constructor(
     private readonly serviciosService: ServiciosService,
-    @Inject(LogsService) private readonly logsService: LogsService,
+    private readonly logsService: LogsService, // 👈 sin @Inject
   ) {}
 
   @Get()
@@ -39,7 +42,11 @@ export class ServiciosController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('Administrador')
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  async update(@Param('id') id: string, @Body() data: Partial<CreateServicioDto>, @Req() req): Promise<Servicio> {
+  async update(
+    @Param('id') id: string, 
+    @Body() data: Partial<CreateServicioDto>, 
+    @Req() req
+  ): Promise<Servicio> {
     const servicio = await this.serviciosService.update(Number(id), data);
     const usuario = req.user?.email || 'anonimo';
     await this.logsService.registrar(usuario, `Editó el servicio ${id}`);
