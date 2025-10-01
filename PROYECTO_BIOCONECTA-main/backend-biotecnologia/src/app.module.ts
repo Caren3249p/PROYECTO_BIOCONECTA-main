@@ -9,8 +9,6 @@ import { RolesModule } from './roles/roles.module';
 import { TareasModule } from './tareas/tareas.module';
 import { HitosModule } from './Hitos/hitos.module';
 import { DocumentosModule } from './Documentos/documentos.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './auth/roles.guard';
 import { LogsModule } from './logs/logs.module';
 import { ReservasModule } from './reservas/reservas.module';
 
@@ -23,19 +21,20 @@ import { ReservasModule } from './reservas/reservas.module';
       username: 'biotec',             // ✅ Usuario principal
       password: 'oki31xdc!#biotec',   // ✅ Contraseña de biotec
       database: 'mydb',               // ✅ Base de datos creada
-      autoLoadEntities: true,
+      autoLoadEntities: true,         // ✅ ya se cargan las entidades
       synchronize: true,
     }),
     UsuariosModule,
     AuthModule,
-    ProyectosModule,   // 👈 ya importamos el módulo que usa Logs
+    ProyectosModule,
     ServiciosModule,
     RolesModule,
     TareasModule,
     HitosModule,
     DocumentosModule,
-    LogsModule,        // 👈 logs también se registra aquí
+    LogsModule,
     ReservasModule,
   ],
 })
 export class AppModule {}
+
